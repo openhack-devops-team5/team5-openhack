@@ -9,7 +9,7 @@ trigger:
      - main
   paths:
     include:
-     - azure-pipelines.yml
+     - azure-pipelines-poi.yml
      - apis/poi
 
 pr:
@@ -18,7 +18,7 @@ pr:
     - main
   paths:
     include:
-     - azure-pipelines.yml
+     - azure-pipelines-poi.yml
      - apis/poi
 
 pool:
