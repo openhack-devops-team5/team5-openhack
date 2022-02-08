@@ -25,7 +25,6 @@ pool:
 steps: 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '/apis/trips'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
