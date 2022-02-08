@@ -9,7 +9,8 @@ trigger:
      - main
   paths:
     include:
-     - api/poi
+     - azure-pipelines.yml
+     - apis/poi
 
 pr:
   branches:
@@ -17,13 +18,14 @@ pr:
     - main
   paths:
     include:
-     - api/poi
+     - azure-pipelines.yml
+     - apis/poi
 
 pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'api/poi/*.sln'
+  solution: 'apis/poi/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
