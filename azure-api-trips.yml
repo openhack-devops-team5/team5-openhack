@@ -37,8 +37,13 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
 - task: Go@0
   inputs:
+    command: 'get'
+    arguments: 'github.com/jstemmer/go-junit-report'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
+- task: Go@0
+  inputs:
     command: 'test'
-    arguments: './tripsgo -run Unit -v'
+    arguments: './tripsgo -run Unit -coverprofile=coverage.txt -covermode count | go-junit-report > report.xml'
     workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
 
 - task: CopyFiles@2
