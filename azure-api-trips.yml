@@ -50,5 +50,5 @@ steps:
         dep ensure
     fi
     go build -v .
-  workingDirectory: '$(modulePath)/apis/trips'
+  workingDirectory: '$(modulePath)'
   displayName: 'Get dependencies, then build'
