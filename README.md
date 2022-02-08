@@ -1,3 +1,5 @@
+[![Board Status](https://dev.azure.com/openhack-devops-5/86a5f29b-d131-4608-aff1-1483dfb88cfd/cd7673b5-e4c3-4e8d-8c29-387ce2f77c72/_apis/work/boardbadge/5fa0467c-d4b4-433c-89c4-39e1559d4fbf)](https://dev.azure.com/openhack-devops-5/86a5f29b-d131-4608-aff1-1483dfb88cfd/_boards/board/t/cd7673b5-e4c3-4e8d-8c29-387ce2f77c72/Microsoft.RequirementCategory)
+
 ---
 page_type: sample
 languages:
