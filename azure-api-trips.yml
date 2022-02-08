@@ -38,9 +38,8 @@ steps:
 - task: Go@0
   inputs:
     command: 'test'
-    arguments: './tripsgo -run Unit'
+    arguments: './tripsgo'
     workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
-#    workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips/tripsgo'
 
 - task: CopyFiles@2
   inputs:
