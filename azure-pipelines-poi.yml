@@ -39,9 +39,11 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    arguments: '.'
+    projects: '$(solution)'
+    workingDirectory: '.'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    arguments: '.'
+    projects: '$(solution)'
+    workingDirectory: '.'
