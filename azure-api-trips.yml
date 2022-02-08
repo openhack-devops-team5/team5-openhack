@@ -39,7 +39,8 @@ steps:
   inputs:
     command: 'test'
     arguments: '-v'
-    workingDirectory: '$(modulePath)/apis/trips/tripsgo'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips/tripsgo'
+
 - task: CopyFiles@2
   inputs:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
