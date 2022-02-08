@@ -35,11 +35,11 @@ steps:
   inputs:
     command: 'build'
     workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
-- task: Go@0
-  inputs:
-    command: 'test'
-    arguments: '-v'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips/tripsgo'
+# - task: Go@0
+#   inputs:
+#     command: 'test'
+#     arguments: '-v'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips/tripsgo'
 
 - task: CopyFiles@2
   inputs:
