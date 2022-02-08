@@ -23,15 +23,16 @@ pool:
   vmImage: ubuntu-latest
 
 steps: 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '/apis/trips'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
 - task: GoTool@0
   inputs:
     version: '1.13.5'
 - task: Go@0
   inputs:
-    command: 'get'
-    arguments: '-d'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-- task: Go@0
-  inputs:
     command: 'build'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(Build.ArtifactStagingDirectory)/main'
