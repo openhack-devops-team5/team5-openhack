@@ -62,6 +62,7 @@ steps:
     repository: 'devopsoh/api-poi'
     command: 'buildAndPush'
     Dockerfile: 'apis/poi/**/Dockerfile'
+    arguments: '--build-arg build_version=$(Build.BuilId)'
 
 - task: CreateWorkItem@1
   condition: failed()
