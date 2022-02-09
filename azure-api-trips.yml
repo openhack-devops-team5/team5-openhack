@@ -15,6 +15,7 @@ pr:
   branches:
     include:
     - main
+    - azure-api-trips-new
   paths:
     include:
      - apis/trips
