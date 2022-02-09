@@ -56,9 +56,10 @@ steps:
 - task: Docker@2
   displayName: Build an image
   inputs:
-    repository: $(System.DefaultWorkingDirectory)/apis/trips
-    command: build
-    Dockerfile: $(System.DefaultWorkingDirectory)/apis/trips/Dockerfile
+    containerRegistry: 'acr-openhack-team5'
+    repository: 'devopsoh/trips'
+    command: 'build'
+    Dockerfile: '$(System.DefaultWorkingDirectory)/apis/trips/Dockerfile'
 - task: CopyFiles@2
   inputs:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
