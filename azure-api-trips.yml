@@ -1,0 +1,67 @@
+# Go
+# Build your Go project.
+# Add steps that test, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/go
+
+trigger:
+  branches:
+    include:
+     - main
+  paths:
+    include:
+     - apis/trips
+
+pr:
+  branches:
+    include:
+    - main
+    - azure-api-trips-new
+  paths:
+    include:
+     - apis/trips
+
+pool:
+   vmImage: 'ubuntu-latest'
+
+steps: 
+- task: GoTool@0
+  inputs:
+    version: '1.16.8'
+- task: Go@0
+  inputs:
+    command: 'get'
+    arguments: '-d'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
+- task: Go@0
+  inputs:
+    command: 'build'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
+#- task: Go@0
+#  inputs:
+#    command: 'get'
+#    arguments: 'github.com/jstemmer/go-junit-report'
+#    workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips/tripsgo'
+- task: Go@0
+  inputs:
+    command: 'test'
+    arguments: './tripsgo -run Unit'
+#    arguments: './tripsgo -run Unit -coverprofile=coverage.txt -covermode count | go-junit-report > trips-report.xml'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
+    
+#- script: |    
+#    go test -run Unit -coverprofile=coverage.txt -covermode count 2>&1 | go-junit-report > trips-report.xml
+#  workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips/tripsgo'
+#  displayName: 'Run unit test'
+
+#- task: PublishTestResults@2
+#  inputs:
+#    testResultsFormat: 'JUnit'
+#    testResultsFiles: '**/trips-report.xml'
+#    searchFolder: '$(System.DefaultWorkingDirectory)/apis/trips'
+#    failTaskOnFailedTests: true
+- task: CopyFiles@2
+  inputs:
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+     artifactName: drop
