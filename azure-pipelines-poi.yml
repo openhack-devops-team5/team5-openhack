@@ -45,5 +45,6 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: '$(solution), !IntegrationTests.csproj'
+    projects: 'apis/poi/**/UnitTests.csproj'
+    # projects: '$(solution)' #use this when we want to run all tests in the solution (including integration tests)
     workingDirectory: '.'
