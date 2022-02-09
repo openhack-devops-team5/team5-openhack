@@ -54,11 +54,11 @@ steps:
 #  displayName: 'Run unit test'
 
 - task: Docker@2
-  displayName: Build an image
+  displayName: Build and Push an image
   inputs:
     containerRegistry: 'acr-openhack-team5'
     repository: 'devopsoh/api-trips'
-    command: 'build'
+    command: 'buildandPush'
     Dockerfile: '$(System.DefaultWorkingDirectory)/apis/trips/Dockerfile'
 # - task: CopyFiles@2
 #   inputs:
