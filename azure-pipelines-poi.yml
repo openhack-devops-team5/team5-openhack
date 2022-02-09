@@ -1,0 +1,50 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+# trigger:
+#   branches:
+#     include:
+#      - main
+#   paths:
+#     include:
+#      - azure-pipelines-poi.yml
+#      - apis/poi
+
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+     - azure-pipelines-poi.yml
+     - apis/poi
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  solution: 'apis/poi/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '$(solution)'
+    workingDirectory: '.'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'apis/poi/**/UnitTests.csproj'
+    # projects: '$(solution)' #use this when we want to run all tests in the solution (including integration tests)
+    workingDirectory: '.'
