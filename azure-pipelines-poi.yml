@@ -22,7 +22,7 @@ pr:
      - apis/poi
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   solution: 'apis/poi/*.sln'
