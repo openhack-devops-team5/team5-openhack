@@ -57,12 +57,12 @@ steps:
   displayName: Build an image
   inputs:
     containerRegistry: 'acr-openhack-team5'
-    repository: 'devopsoh/trips'
+    repository: 'devopsoh/api-trips'
     command: 'build'
     Dockerfile: '$(System.DefaultWorkingDirectory)/apis/trips/Dockerfile'
-- task: CopyFiles@2
-  inputs:
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-- task: PublishBuildArtifacts@1
-  inputs:
-     artifactName: drop
+# - task: CopyFiles@2
+#   inputs:
+#     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#      artifactName: drop
