@@ -50,3 +50,10 @@ steps:
     projects: 'apis/poi/**/UnitTests.csproj'
     # projects: '$(solution)' #use this when we want to run all tests in the solution (including integration tests)
     workingDirectory: '.'
+
+- task: CreateWorkItem@1
+  condition: failed()
+  inputs:
+    workItemType: 'Issue'
+    title: 'Build Failed'
+    associate: true
