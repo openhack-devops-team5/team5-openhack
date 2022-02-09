@@ -70,6 +70,7 @@ Test('/healthcheck/user', function (t) {
                     }
                     t.ok(validate(response), 'Valid response');
                     t.error(validate.errors, 'No validation errors');
+                    t.fail('please break for real');
                     t.end();
                 });
             });
