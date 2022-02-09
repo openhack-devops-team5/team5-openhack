@@ -62,7 +62,7 @@ steps:
     repository: 'devopsoh/api-poi'
     command: 'build'
     Dockerfile: 'apis/poi/**/Dockerfile'
-    arguments: '--build-arg build_version=$(Build.BuilId)'
+    arguments: '--build-arg build_version=$(Build.BuildId)'
 
 - task: Docker@2
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
