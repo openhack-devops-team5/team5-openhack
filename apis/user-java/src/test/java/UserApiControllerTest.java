@@ -48,6 +48,7 @@ public class UserApiControllerTest {
         // this must be called for the @Mock annotations above to be processed
         // and for the mock service to be injected into the controller under
         // test.
+        //test making changes and commit to trigger the build.  
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(userApiController).build();
         profile = new Profile();
@@ -56,6 +57,7 @@ public class UserApiControllerTest {
         profile.setRanking(1);
         profile.setTotalDistance(1000f);
         profile.setId("2");
+        
     }
 
     @Test
