@@ -5,14 +5,14 @@
 
 #change to test a PR
 
-# trigger:
-#   branches:
-#     include:
-#      - main
-#   paths:
-#     include:
-#      - azure-pipelines-poi.yml
-#      - apis/poi
+trigger:
+  branches:
+    include:
+     - main
+  paths:
+    include:
+     - azure-pipelines-poi.yml
+     - apis/poi
 
 pr:
   branches:
@@ -56,6 +56,7 @@ steps:
     workingDirectory: '.'
 
 - task: Docker@2
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')
   inputs:
     containerRegistry: 'acr-openhack-team5'
     repository: 'devopsoh/api-poi'
