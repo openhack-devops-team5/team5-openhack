@@ -1,6 +1,6 @@
 package main
 
-impot (
+import (
 	"flag"
 	"fmt"
 	"io/ioutil"
