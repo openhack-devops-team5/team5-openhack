@@ -53,12 +53,12 @@ steps:
 #  workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips/tripsgo'
 #  displayName: 'Run unit test'
 
-#- task: PublishTestResults@2
-#  inputs:
-#    testResultsFormat: 'JUnit'
-#    testResultsFiles: '**/trips-report.xml'
-#    searchFolder: '$(System.DefaultWorkingDirectory)/apis/trips'
-#    failTaskOnFailedTests: true
+- task: Docker@2
+  displayName: Build an image
+  inputs:
+    repository: $(System.DefaultWorkingDirectory)/apis/trips
+    command: build
+    Dockerfile: $(System.DefaultWorkingDirectory)/apis/trips/Dockerfile
 - task: CopyFiles@2
   inputs:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
