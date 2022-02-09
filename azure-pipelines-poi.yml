@@ -34,6 +34,10 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
+- task: DockerInstaller@0
+  inputs:
+    dockerVersion: '17.09.0-ce'
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
@@ -50,6 +54,12 @@ steps:
     projects: 'apis/poi/**/UnitTests.csproj'
     # projects: '$(solution)' #use this when we want to run all tests in the solution (including integration tests)
     workingDirectory: '.'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'acr-openhack-team5'
+    command: 'buildAndPush'
+    Dockerfile: 'apis/poi/**/Dockerfile'
 
 - task: CreateWorkItem@1
   condition: failed()
