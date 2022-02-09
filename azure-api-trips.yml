@@ -43,9 +43,13 @@ steps:
 - task: Go@0
   inputs:
     command: 'test'
-    arguments: './tripsgo -run Unit -coverprofile=coverage.txt -covermode count | go-junit-report > report.xml'
+    arguments: './tripsgo -run Unit -coverprofile=coverage.txt -covermode count | go-junit-report > trips-report.xml'
     workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
-
+- task: PublishTestResults@2
+  inputs:
+    testRunner: JUnit
+    testResultsFiles: '**/trips-report.xml'
+    failTaskOnFailedTests: true
 - task: CopyFiles@2
   inputs:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
