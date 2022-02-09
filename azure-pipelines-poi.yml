@@ -3,14 +3,16 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-# trigger:
-#   branches:
-#     include:
-#      - main
-#   paths:
-#     include:
-#      - azure-pipelines-poi.yml
-#      - apis/poi
+#change to test a PR
+
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+     - azure-pipelines-poi.yml
+     - apis/poi
 
 pr:
   branches:
@@ -32,6 +34,10 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
+- task: DockerInstaller@0
+  inputs:
+    dockerVersion: '17.09.0-ce'
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
@@ -48,3 +54,18 @@ steps:
     projects: 'apis/poi/**/UnitTests.csproj'
     # projects: '$(solution)' #use this when we want to run all tests in the solution (including integration tests)
     workingDirectory: '.'
+
+- task: Docker@2
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  inputs:
+    containerRegistry: 'acr-openhack-team5'
+    repository: 'devopsoh/api-poi'
+    command: 'buildAndPush'
+    Dockerfile: 'apis/poi/**/Dockerfile'
+
+- task: CreateWorkItem@1
+  condition: failed()
+  inputs:
+    workItemType: 'Issue'
+    title: 'Build Failed'
+    associate: true
