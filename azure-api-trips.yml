@@ -15,7 +15,6 @@ pr:
   branches:
     include:
     - main
-    - azure-api-trips-new
   paths:
     include:
      - apis/trips
@@ -65,3 +64,10 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
      artifactName: drop
+
+- task: CreateWorkItem@1
+  condition: failed()
+  inputs:
+    workItemType: 'Issue'
+    title: 'Build Failed'
+    associate: true
