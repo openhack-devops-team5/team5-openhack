@@ -45,10 +45,12 @@ steps:
     command: 'test'
     arguments: './tripsgo -run Unit -coverprofile=coverage.txt -covermode count | go-junit-report > trips-report.xml'
     workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
+
 - task: PublishTestResults@2
   inputs:
-    testRunner: JUnit
+    testResultsFormat: 'JUnit'
     testResultsFiles: '**/trips-report.xml'
+    searchFolder: '$(System.DefaultWorkingDirectory)/apis/trips'
     failTaskOnFailedTests: true
 - task: CopyFiles@2
   inputs:
