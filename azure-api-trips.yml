@@ -35,27 +35,29 @@ steps:
   inputs:
     command: 'build'
     workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
-- task: Go@0
-  inputs:
-    command: 'get'
-    arguments: 'github.com/jstemmer/go-junit-report'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips/tripsgo'
 #- task: Go@0
 #  inputs:
-#    command: 'test'
-#    arguments: './tripsgo -run Unit -coverprofile=coverage.txt -covermode count | go-junit-report > trips-report.xml'
-#    workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
-- script: |    
-    go test -run Unit -coverprofile=coverage.txt -covermode count 2>&1 | go-junit-report > trips-report.xml
-  workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips/tripsgo'
-  displayName: 'Run unit test'
-
-- task: PublishTestResults@2
+#    command: 'get'
+#    arguments: 'github.com/jstemmer/go-junit-report'
+#    workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips/tripsgo'
+- task: Go@0
   inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: '**/trips-report.xml'
-    searchFolder: '$(System.DefaultWorkingDirectory)/apis/trips'
-    failTaskOnFailedTests: true
+    command: 'test'
+    arguments: './tripsgo -run Unit'
+#    arguments: './tripsgo -run Unit -coverprofile=coverage.txt -covermode count | go-junit-report > trips-report.xml'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips'
+    
+#- script: |    
+#    go test -run Unit -coverprofile=coverage.txt -covermode count 2>&1 | go-junit-report > trips-report.xml
+#  workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips/tripsgo'
+#  displayName: 'Run unit test'
+
+#- task: PublishTestResults@2
+#  inputs:
+#    testResultsFormat: 'JUnit'
+#    testResultsFiles: '**/trips-report.xml'
+#    searchFolder: '$(System.DefaultWorkingDirectory)/apis/trips'
+#    failTaskOnFailedTests: true
 - task: CopyFiles@2
   inputs:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
