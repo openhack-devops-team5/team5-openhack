@@ -58,6 +58,7 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'acr-openhack-team5'
+    repository: 'devopsoh/api-poi'
     command: 'buildAndPush'
     Dockerfile: 'apis/poi/**/Dockerfile'
 
