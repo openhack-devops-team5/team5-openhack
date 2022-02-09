@@ -3,14 +3,14 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-trigger:
-  branches:
-    include:
-     - main
-  paths:
-    include:
-     - azure-pipelines-poi.yml
-     - apis/poi
+# trigger:
+#   branches:
+#     include:
+#      - main
+#   paths:
+#     include:
+#      - azure-pipelines-poi.yml
+#      - apis/poi
 
 pr:
   branches:
