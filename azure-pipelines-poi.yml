@@ -60,9 +60,16 @@ steps:
   inputs:
     containerRegistry: 'acr-openhack-team5'
     repository: 'devopsoh/api-poi'
-    command: 'buildAndPush'
+    command: 'build'
     Dockerfile: 'apis/poi/**/Dockerfile'
     arguments: '--build-arg build_version=$(Build.BuilId)'
+
+- task: Docker@2
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  inputs:
+    containerRegistry: 'acr-openhack-team5'
+    repository: 'devopsoh/api-poi'
+    command: 'push'
 
 - task: CreateWorkItem@1
   condition: failed()
