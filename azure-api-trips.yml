@@ -53,15 +53,16 @@ steps:
 #  workingDirectory: '$(System.DefaultWorkingDirectory)/apis/trips/tripsgo'
 #  displayName: 'Run unit test'
 
-#- task: PublishTestResults@2
-#  inputs:
-#    testResultsFormat: 'JUnit'
-#    testResultsFiles: '**/trips-report.xml'
-#    searchFolder: '$(System.DefaultWorkingDirectory)/apis/trips'
-#    failTaskOnFailedTests: true
-- task: CopyFiles@2
+- task: Docker@2
+  displayName: Build and Push an image
   inputs:
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-- task: PublishBuildArtifacts@1
-  inputs:
-     artifactName: drop
+    containerRegistry: 'acr-openhack-team5'
+    repository: 'devopsoh/api-trips'
+    command: 'buildandPush'
+    Dockerfile: '$(System.DefaultWorkingDirectory)/apis/trips/Dockerfile'
+# - task: CopyFiles@2
+#   inputs:
+#     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#      artifactName: drop
