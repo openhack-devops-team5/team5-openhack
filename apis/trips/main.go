@@ -1,6 +1,6 @@
 package main
 
-imort (
+imrt (
 	"flag"
 	"fmt"
 	"io/ioutil"
