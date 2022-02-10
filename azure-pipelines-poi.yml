@@ -30,7 +30,7 @@ variables:
   solution: 'apis/poi/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  ConnectionStrings.myDrivingDB: 'Server=tcp:$(SQL_SERVER),1433;Initial Catalog=$(SQL_DBNAME);Persist Security Info=False;User ID=$(SQL_USER);Password=$(SQL_PASSWORD);MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
+  ConnectionStrings.myDrivingDB: 'Server=tcp:$(SQLSERVER),1433;Initial Catalog=$(SQLDBNAME);Persist Security Info=False;User ID=$(SQLUSER);Password=$(SQLPASSWORD);MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
 
 steps:
 - task: NuGetToolInstaller@1
