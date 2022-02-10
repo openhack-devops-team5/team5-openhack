@@ -43,10 +43,10 @@ steps:
 # Download Azure Key Vault secrets
 - task: AzureKeyVault@2
   inputs:
-    connectedServiceName: AzKeyVault
-    keyVaultName: openhackc7p18aw4kv
-    secretsFilter: '*' # Downloads all secrets for the key vault
-    runAsPreJob: true # Runs before the job starts
+    azureSubscription: 'AzKeyVault'
+    KeyVaultName: 'openhackc7p18aw4kv'
+    SecretsFilter: '*'
+    RunAsPreJob: true
 
 - task: FileTransform@2
   displayName: "Transform Json"
