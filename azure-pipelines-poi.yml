@@ -47,12 +47,6 @@ steps:
     secretsFilter: '*' # Downloads all secrets for the key vault
     runAsPreJob: true # Runs before the job starts
 
-- task: FileTransform@1
-  inputs:
-    folderPath: '$(System.DefaultWorkingDirectory)/'
-    fileType: 'json'
-    targetFiles: 'appsettings.json'
-
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
@@ -66,8 +60,8 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: 'apis/poi/**/UnitTests.csproj'
-    # projects: '$(solution)' #use this when we want to run all tests in the solution (including integration tests)
+    # projects: 'apis/poi/**/UnitTests.csproj'
+    projects: '$(solution)' #use this when we want to run all tests in the solution (including integration tests)
     workingDirectory: '.'
 
 - task: Docker@2
