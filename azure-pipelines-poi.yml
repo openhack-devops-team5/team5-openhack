@@ -30,6 +30,8 @@ variables:
   solution: 'apis/poi/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  ConnectionStrings.myDrivingDB: 'Server=tcp:$(SQLSERVER),1433;Initial Catalog=$(SQLDBNAME);Persist Security Info=False;User ID=$(SQLUSER);Password=$(SQLPASSWORD);MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
+  # -group: SQLSecrets
 
 steps:
 - task: NuGetToolInstaller@1
@@ -37,6 +39,30 @@ steps:
 - task: DockerInstaller@0
   inputs:
     dockerVersion: '17.09.0-ce'
+
+# Azure Key Vault
+# Download Azure Key Vault secrets
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: 'AzKeyVault'
+    KeyVaultName: 'openhackc7p18aw4kv'
+    SecretsFilter: '*'
+    RunAsPreJob: true
+
+- bash: |
+      cat apis/poi/tests/IntegrationTests/appsettings.json
+  displayName: 'Pre-transform settings file'
+
+- task: FileTransform@2
+  displayName: "Transform Json"
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)/**/'
+    xmlTransformationRules: 
+    jsonTargetFiles: '**/appsettings.json'
+
+- bash: |
+      cat apis/poi/tests/IntegrationTests/appsettings.json
+  displayName: 'Post-transform settings file'
 
 - task: NuGetCommand@2
   inputs:
@@ -51,8 +77,8 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: 'apis/poi/**/UnitTests.csproj'
-    # projects: '$(solution)' #use this when we want to run all tests in the solution (including integration tests)
+    # projects: 'apis/poi/**/UnitTests.csproj'
+    projects: '$(solution)' #use this when we want to run all tests in the solution (including integration tests)
     workingDirectory: '.'
 
 - task: Docker@2
