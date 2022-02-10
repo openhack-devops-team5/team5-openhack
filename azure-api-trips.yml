@@ -10,15 +10,16 @@ trigger:
   paths:
     include:
      - apis/trips
+     - azure-api-trips.yml
 
 pr:
   branches:
     include:
     - main
-    - azure-api-trips-new
   paths:
     include:
      - apis/trips
+     - azure-api-trips.yml
 
 pool:
    vmImage: 'ubuntu-latest'
@@ -60,7 +61,7 @@ steps:
     repository: 'devopsoh/api-trips'
     command: 'build'
     Dockerfile: '$(System.DefaultWorkingDirectory)/apis/trips/Dockerfile'
-    arguments: --build-arg build_version = $(Build.BuildId)
+    arguments: '--build-arg build_version=$(Build.BuildId)'
 
 - task: Docker@2
   displayName: Push an image
