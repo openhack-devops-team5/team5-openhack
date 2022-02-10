@@ -47,6 +47,12 @@ steps:
     secretsFilter: '*' # Downloads all secrets for the key vault
     runAsPreJob: true # Runs before the job starts
 
+- task: FileTransform@1
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)/'
+    fileType: 'json'
+    targetFiles: 'appsettings.json'
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
