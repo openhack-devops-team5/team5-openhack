@@ -55,6 +55,10 @@ steps:
     xmlTransformationRules: 
     jsonTargetFiles: '**/appsettings.json'
 
+- bash: |
+      cat apis/poi/tests/IntegrationTests/appsettings.json
+  displayName: "Show Json substitution"
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
